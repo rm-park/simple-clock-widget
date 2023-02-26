@@ -3,13 +3,16 @@ package com.dev.rmp.clockwidget
 import android.appwidget.AppWidgetManager
 import android.appwidget.AppWidgetProvider
 import android.content.Context
-import android.util.Log
+import android.content.Intent
 import android.widget.RemoteViews
 
 /**
  * Implementation of App Widget functionality.
  */
 class ClockWidget : AppWidgetProvider() {
+    /**
+     * updatePeriodMills 라는 업데이트 주기 값에 따라 호출되는 함수
+     */
     override fun onUpdate(
         context: Context,
         appWidgetManager: AppWidgetManager,
@@ -21,12 +24,25 @@ class ClockWidget : AppWidgetProvider() {
         }
     }
 
+    /**
+     * 최초의 앱 위젯이 등록될 때 호출
+     */
     override fun onEnabled(context: Context) {
         // Enter relevant functionality for when the first widget is create
     }
 
+    /**
+     * 최종 앱 위젯 인스턴스가 삭제될 때 호출
+     */
     override fun onDisabled(context: Context) {
         // Enter relevant functionality for when the last widget is disabled
+    }
+
+    /**
+     * activity 에서 전달한 broadcast 가  received ?
+     */
+    override fun onReceive(context: Context?, intent: Intent?) {
+        super.onReceive(context, intent)
     }
 }
 
