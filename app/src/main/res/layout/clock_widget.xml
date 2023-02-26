@@ -1,4 +1,6 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     style="@style/Widget.SimpleClockWidget.AppWidget.Container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -6,7 +8,10 @@
 
     <TextView
         android:id="@+id/appwidget_text"
-        style="@style/Widget.SimpleClockWidget.AppWidget.InnerView"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
@@ -15,7 +20,8 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:contentDescription="@string/appwidget_text"
-        android:text="@string/appwidget_text"
+        android:text="@string/WIDGET_MAIN_TITLE_SIMPLE_CLOCK_WIDGET"
         android:textSize="24sp"
-        android:textStyle="bold|italic" />
+        android:textStyle="bold" />
+
 </RelativeLayout>

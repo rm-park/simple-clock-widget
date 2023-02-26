@@ -4,5 +4,7 @@
     <string name="add_widget">Add widget</string>
     <string name="app_widget_description">This is an app widget description</string>
 
+    <!-- widget main -->
+    <string name="WIDGET_MAIN_TITLE_SIMPLE_CLOCK_WIDGET">Simple Clock Widget</string>
     <string name="SETTING_ACTIVITY_SET_METADATA">설정하기</string>
 </resources>
