@@ -31,6 +31,11 @@ class WidgetSettingActivity : AppCompatActivity() {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        Log.d(TAG, "onResume:")
+    }
+
     companion object {
         private const val TAG = "WidgetSettingActivity"
     }

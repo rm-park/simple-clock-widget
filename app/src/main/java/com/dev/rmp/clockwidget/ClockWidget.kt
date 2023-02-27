@@ -2,9 +2,10 @@ package com.dev.rmp.clockwidget
 
 import android.appwidget.AppWidgetManager
 import android.appwidget.AppWidgetProvider
+import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
-import android.widget.RemoteViews
+import android.util.Log
 
 /**
  * Implementation of App Widget functionality.
@@ -40,28 +41,22 @@ class ClockWidget : AppWidgetProvider() {
         Log.d(TAG, "onDisabled:")
     }
 
-    companion object {
-        private const val TAG = "ClockWidgetProvider"
-    }
 
     /**
      * activity 에서 전달한 broadcast 가  received ?
      */
     override fun onReceive(context: Context?, intent: Intent?) {
+        Log.d(TAG, "onReceive: ${intent?.action}")
         super.onReceive(context, intent)
+
+        context?.let {
+            AppWidgetManager.getInstance(it).getAppWidgetIds(ComponentName(it, ClockWidget::class.java)).forEach { id ->
+                updateAppWidget(it, it.appWidgetManager, id)
+            }
+        }
     }
-}
 
-internal fun updateAppWidget(
-    context: Context,
-    appWidgetManager: AppWidgetManager,
-    appWidgetId: Int
-) {
-    val widgetText = context.getString(R.string.appwidget_text)
-    // Construct the RemoteViews object
-    val views = RemoteViews(context.packageName, R.layout.clock_widget)
-    views.setTextViewText(R.id.appwidget_text, widgetText)
-
-    // Instruct the widget manager to update the widget
-    appWidgetManager.updateAppWidget(appWidgetId, views)
+    companion object {
+        private const val TAG = "ClockWidgetProvider"
+    }
 }
