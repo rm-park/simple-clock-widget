@@ -7,4 +7,5 @@
     <!-- widget main -->
     <string name="WIDGET_MAIN_TITLE_SIMPLE_CLOCK_WIDGET">Simple Clock Widget</string>
     <string name="SETTING_ACTIVITY_SET_METADATA">설정하기</string>
+    <string name="WIDGET_CONTENT_DESCRIPTION">답답해서 직접 만들어본 시계 위젯입니다.</string>
 </resources>

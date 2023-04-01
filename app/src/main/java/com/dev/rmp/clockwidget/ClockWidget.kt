@@ -2,7 +2,6 @@ package com.dev.rmp.clockwidget
 
 import android.appwidget.AppWidgetManager
 import android.appwidget.AppWidgetProvider
-import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.util.Log
@@ -23,7 +22,7 @@ class ClockWidget : AppWidgetProvider() {
 
         // There may be multiple widgets active, so update all of them
         for (appWidgetId in appWidgetIds) {
-            updateAppWidget(context, appWidgetManager, appWidgetId)
+            updateAppWidget(context, appWidgetManager, appWidgetIds, appWidgetId)
         }
     }
 
@@ -32,6 +31,7 @@ class ClockWidget : AppWidgetProvider() {
      */
     override fun onEnabled(context: Context) {
         Log.d(TAG, "onEnabled:")
+
     }
 
     /**
@@ -47,11 +47,17 @@ class ClockWidget : AppWidgetProvider() {
      */
     override fun onReceive(context: Context?, intent: Intent?) {
         Log.d(TAG, "onReceive: ${intent?.action}")
+        Log.d(TAG, "Who send?: ${intent?.`package`}, ${intent?.component}")
         super.onReceive(context, intent)
 
-        context?.let {
-            AppWidgetManager.getInstance(it).getAppWidgetIds(ComponentName(it, ClockWidget::class.java)).forEach { id ->
-                updateAppWidget(it, it.appWidgetManager, id)
+        intent?.let {
+            if (it.action == AppWidgetManager.ACTION_APPWIDGET_UPDATE) {
+                Log.d(TAG, "ACTION_APPWIDGET_UPDATE")
+                it.getIntArrayExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS)?.let { array ->
+                    context?.let { ctx ->
+                        onUpdate(ctx, AppWidgetManager.getInstance(ctx), array)
+                    }
+                } ?: Log.e(TAG, "AppWidgetIds is null.")
             }
         }
     }
